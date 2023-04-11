@@ -1,0 +1,14 @@
+{
+    "status": "string",
+    "params": {
+        "username": "string",
+        "damping_factor": "numer",
+        "depth": "number"
+    },
+    "result": [
+        {
+            "username": "string",
+            "score": "number"
+        }
+    ]
+}

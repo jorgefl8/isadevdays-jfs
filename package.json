@@ -1,0 +1,28 @@
+{
+  "name": "isadevdays-jfs",
+  "version": "1.0.0",
+  "description": "Proyecto en el cual iré realizando los retos",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgefl8/isadevdays-jfs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jorgefl8/isadevdays-jfs/issues"
+  },
+  "homepage": "https://github.com/jorgefl8/isadevdays-jfs#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
