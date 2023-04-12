@@ -3,7 +3,7 @@ async function _callGithubApi(username, depth) {
   const token = "Bearer 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";
   //const token = `Bearer ${process.env.GITHUB_TOKEN}`;
   const url = "https://api.github.com/graphql";
-  const requestConfig = { Authorization: token,  Accept: 'application/vnd.github.starfox-preview+json' };
+  const requestConfig = { Authorization: token, Accept: 'application/vnd.github.starfox-preview+json' };
   let usuario = {
     username: username,
     depth: depth,
@@ -11,7 +11,6 @@ async function _callGithubApi(username, depth) {
     followers: [],
     following: []
   }
-  let pp = true;
   let hasNextPage = true;
   let endCursor = null;
   const query = `query{
@@ -35,9 +34,9 @@ async function _callGithubApi(username, depth) {
       }
     }
   }`;
-  const query_more_following = `query{
+  const query_more_following = `query ($after: String){
     user(login: "${username}"){
-      following(first: 100, after: "${endCursor}") {
+      following(first: 100, after: $after) {
         pageInfo {
           hasNextPage
           endCursor
@@ -48,19 +47,18 @@ async function _callGithubApi(username, depth) {
       }
     }
   }`;
-  while (pp) {
-    if (endCursor != null && hasNextPage == true) {
-        pp = false;
-        /*
-        mientras se arregla
-        const result = await axios.post(url, {query_more_following}, { headers: requestConfig });
-        const userData = result.data.data.user;
-        usuario.following.push(userData.following.nodes.map((following) => following.login));
-        hasNextPage = userData.following.pageInfo.hasNextPage;
-        endCursor = userData.following.pageInfo.endCursor;
-        */
+  while (hasNextPage) {
+    if (hasNextPage === true && endCursor != null ) {
+      const result = await axios.post(url, JSON.stringify({query: query_more_following, variables:{ after: endCursor}}), { headers: requestConfig });
+      const userData = result.data.data.user;
+      const followings = userData.following.nodes.map((following) => following.login);
+      for(const following of followings){
+        usuario.following.push(following);
+      }
+      hasNextPage = userData.following.pageInfo.hasNextPage;
+      endCursor = userData.following.pageInfo.endCursor;
     } else {
-      const result = await axios.post(url, {query}, { headers: requestConfig });
+      const result = await axios.post(url, JSON.stringify({query: query}), { headers: requestConfig });
       const userData = result.data.data.user;
       usuario.status = userData.status?.message;
       usuario.followers = userData.followers.nodes.map((follower) => follower.login);
@@ -68,10 +66,8 @@ async function _callGithubApi(username, depth) {
       endCursor = userData.following.pageInfo.endCursor;
       hasNextPage = userData.following.pageInfo.hasNextPage;
     }
-    if (hasNextPage == false) {
-      pp = false;
-    }
   }
+  //console.log(usuario.following);
   return usuario;
 }
 
@@ -105,13 +101,9 @@ async function github_pagerank_aux(user, resultado, acc, sumatorio) {
   } else if (acc === resultado.params.depth) {
     pagerank = (1 - resultado.params.damping_factor) + resultado.params.damping_factor * parseFloat(sumatorio);
   }
-  console.log("sumatorio: " + sumatorio);
-  console.log("pagerank: " + pagerank);
   resultado.result[acc].score = parseFloat(pagerank);
   return pagerank;
 }
-
-
 
 
 export { github_pagerank, _callGithubApi };
