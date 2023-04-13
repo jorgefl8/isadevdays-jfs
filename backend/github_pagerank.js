@@ -67,7 +67,6 @@ async function _callGithubApi(username, depth) {
       hasNextPage = userData.following.pageInfo.hasNextPage;
     }
   }
-  //console.log(usuario.following);
   return usuario;
 }
 
@@ -86,24 +85,26 @@ async function github_pagerank(username, depth, damping_factor) {
   resultado.params.username = user.username;
   resultado.params.damping_factor = parseFloat(damping_factor);
   resultado.params.depth = parseInt(depth);
-  return github_pagerank_aux(user, resultado, 0, 0);
+  let resul = {
+    "resultado": resultado,
+    "pagerank": 0
+  };
+  resul = await github_pagerank_aux(user, resul, 0, 0);
+  return resul.resultado;
 }
-async function github_pagerank_aux(user, resultado, acc, sumatorio) {
+async function github_pagerank_aux(user, resul, acc, sumatorio) {
   let pagerank = 0;
-  if (acc < resultado.params.depth) {
-    resultado.result.push({ "username": user.username, "score": 0 });
-    for (const follower of user.followers) {
-      const user_aux = await _callGithubApi(follower, resultado.params.depth);
-      const followerScore = await github_pagerank_aux(user_aux, resultado, acc + 1, sumatorio) / user_aux.following.length;
-      sumatorio += followerScore;
-    }
+  if (acc < resul.resultado.params.depth) {
+    resul.resultado.result.push({ "username": user.username, "score": 0 });
+    let primer_seguidor = user.followers[0];
+    let user_aux = await _callGithubApi(primer_seguidor, resul.resultado.params.depth);
+    sumatorio += github_pagerank_aux(user_aux, resultado, acc + 1, sumatorio) / user_aux.following.length;
     pagerank = (1 - resultado.params.damping_factor) + resultado.params.damping_factor * parseFloat(sumatorio);
-  } else if (acc === resultado.params.depth) {
-    pagerank = (1 - resultado.params.damping_factor) + resultado.params.damping_factor * parseFloat(sumatorio);
+    resultado.result[acc].score = parseFloat(pagerank);
+  } else {
+    //sumatorio += 1 / user_aux.following.length;
+    pagerank = (1 - resul.resultado.params.damping_factor) + resul.resultado.params.damping_factor * 1;
   }
-  resultado.result[acc].score = parseFloat(pagerank);
   return pagerank;
 }
-
-
 export { github_pagerank, _callGithubApi };

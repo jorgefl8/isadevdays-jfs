@@ -1,64 +1,79 @@
-// Importar una librería de manejo de peticiones HTTP, como axios
-// npm install axios
-import axios from "axios";
-
-// URL base de la API de GitHub
-const BASE_URL = 'https://api.github.com';
-
-// Función para obtener el primer seguidor de un usuario en GitHub
-async function obtenerPrimerSeguidor(usuario) {
-    try {
-        const respuesta = await axios.get(`${BASE_URL}/users/${usuario}/followers`);
-        const seguidores = respuesta.data;
-        if (seguidores.length > 0) {
-            return seguidores[0].login;
-        } else {
-            console.log(`El usuario "${usuario}" no tiene seguidores en GitHub.`);
-            return null;
-        }
-    } catch (error) {
-        console.error(`Error al obtener los seguidores del usuario "${usuario}":`, error);
-        return null;
-    }
-}
-
-// Función para calcular el PageRank
-async function calcularPageRank(usuarioInicial) {
-    const d = 0.85; // Factor de amortiguación
-    const numIteraciones = 10; // Número de iteraciones
-
-    let usuarioActual = usuarioInicial;
-    const pageRank = new Map();
-    pageRank.set(usuarioActual, 1); // Inicializar el PageRank del usuario inicial en 1
-
-    // Realizar las iteraciones del algoritmo PageRank
-    for (let i = 0; i < numIteraciones; i++) {
-        const nuevoPageRank = new Map();
-        const primerSeguidor = await obtenerPrimerSeguidor(usuarioActual);
-        if (!primerSeguidor) {
-            break; // Si no hay primer seguidor, salir del bucle
-        }
-        nuevoPageRank.set(primerSeguidor, d * pageRank.get(usuarioActual));
-        pageRank.forEach((valor, usuario) => {
-            if (usuario !== usuarioActual) {
-                nuevoPageRank.set(usuario, (1 - d) / pageRank.size);
+import axios from 'axios';
+async function callGitHubApi(username) {
+    const token = "Bearer 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";
+    const url = 'https://api.github.com/graphql';
+    const requestConfig = { Authorization: token, Accept: 'application/vnd.github.starfox-preview+json' };
+    let firstFollower = "";
+    const query = `query{
+        user(login: "${username}"){
+          followers(first:100){
+            nodes{
+              login
             }
-        });
-        usuarioActual = primerSeguidor;
-        nuevoPageRank.forEach((valor, usuario) => {
-            pageRank.set(usuario, valor);
-        });
+          }
+          following(first: 100) {
+            nodes {
+              login
+            }
+          }
+        }
+      }`;
+    let usuario = {
+        "firstFollower": "",
+        "following": []
     }
-
-    return pageRank;
+    const result = await axios.post(url, JSON.stringify({ query: query }), { headers: requestConfig });
+    const userData = result.data.data.user;
+    const followers = userData.followers.nodes.map((follower) => follower.login);
+    firstFollower = followers[0];
+    const following = userData.following.nodes.map((following) => following.login);
+    usuario.firstFollower = firstFollower;
+    usuario.following = following;
+    return usuario;
 }
 
-// Calcular el PageRank del primer seguidor de un usuario dado en GitHub
-const usuarioInicial = 'jorgealfonsogarcia';
-calcularPageRank(usuarioInicial)
-    .then(resultadoPageRank => {
-        console.log(`Resultado del PageRank del primer seguidor de "${usuarioInicial}":`, resultadoPageRank);
-    })
-    .catch(error => {
-        console.error(`Error al calcular el PageRank del primer seguidor de "${usuarioInicial}":`, error);
-    });
+async function github_pagerank(username, iterations, damping_factor) {
+    const data = await callGitHubApi(username);
+    const follower = [data.firstFollower];
+    const following = data.following;
+
+    let pageranks = {};
+    if (follower.length > 0) {
+        pageranks[follower[0]] = 0;
+    }
+    for (const user of follower.concat(following)) {
+        if (user !== follower[0]) {
+            pageranks[user] = 1 / (follower.length + following.length);
+        }
+    }
+
+    for (let i = 0; i < iterations; i++) {
+        const newPageranks = {};
+        for (const user of follower) {
+            let pagerank = 0;
+            const C = following.filter(f => f !== user);
+            for (const follower of C) {
+                pagerank += pageranks[follower] / follower.length;
+            }
+            pagerank = damping_factor * pagerank + (1 - damping_factor) / (follower.length + following.length);
+            newPageranks[user] = pagerank;
+        }
+        for (const user of following) {
+            let pagerank = 0;
+            const C = follower.filter(f => f !== user);
+            for (const follower of C) {
+                pagerank += pageranks[follower] / following.length;
+            }
+            pagerank = damping_factor * pagerank + (1 - damping_factor) / (follower.length + following.length);
+            newPageranks[user] = pagerank;
+        }
+        pageranks = newPageranks;
+    }
+
+    console.log(`${username}: ${pageranks[username]}`);
+    console.log(`${follower[0]}: ${pageranks[follower[0]]}`);
+}
+
+
+
+export { github_pagerank, callGitHubApi };
