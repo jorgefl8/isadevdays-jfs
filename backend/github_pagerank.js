@@ -13,12 +13,12 @@ async function _callGithubApi(username, depth) {
   }
   let hasNextPage = true;
   let endCursor = null;
-  const query = `query{
+  const query = `query($depth: Int){
     user(login: "${username}"){
       status {
         message
       }
-      followers(first:${depth}){
+      followers(first: $depth){
         nodes{
           login
         }
@@ -48,17 +48,17 @@ async function _callGithubApi(username, depth) {
     }
   }`;
   while (hasNextPage) {
-    if (hasNextPage === true && endCursor != null ) {
-      const result = await axios.post(url, JSON.stringify({query: query_more_following, variables:{ after: endCursor}}), { headers: requestConfig });
+    if (hasNextPage === true && endCursor != null) {
+      const result = await axios.post(url, JSON.stringify({ query: query_more_following, variables: { after: endCursor, depth: depth } }), { headers: requestConfig });
       const userData = result.data.data.user;
       const followings = userData.following.nodes.map((following) => following.login);
-      for(const following of followings){
+      for (const following of followings) {
         usuario.following.push(following);
       }
       hasNextPage = userData.following.pageInfo.hasNextPage;
       endCursor = userData.following.pageInfo.endCursor;
     } else {
-      const result = await axios.post(url, JSON.stringify({query: query}), { headers: requestConfig });
+      const result = await axios.post(url, JSON.stringify({ query: query, variables: { depth: depth } }), { headers: requestConfig });
       const userData = result.data.data.user;
       usuario.status = userData.status?.message;
       usuario.followers = userData.followers.nodes.map((follower) => follower.login);
@@ -85,26 +85,26 @@ async function github_pagerank(username, depth, damping_factor) {
   resultado.params.username = user.username;
   resultado.params.damping_factor = parseFloat(damping_factor);
   resultado.params.depth = parseInt(depth);
-  let resul = {
-    "resultado": resultado,
-    "pagerank": 0
-  };
-  resul = await github_pagerank_aux(user, resul, 0, 0);
-  return resul.resultado;
+  const resul = github_pagerank_aux(user, resultado, 0, 0);
+  return resul;
 }
-async function github_pagerank_aux(user, resul, acc, sumatorio) {
+async function github_pagerank_aux(user, resultado, acc, sumatorio) {
   let pagerank = 0;
-  if (acc < resul.resultado.params.depth) {
-    resul.resultado.result.push({ "username": user.username, "score": 0 });
+  if (acc < resultado.params.depth) {
+    resultado.result.push({ "username": user.username, "score": 0 });
     let primer_seguidor = user.followers[0];
-    let user_aux = await _callGithubApi(primer_seguidor, resul.resultado.params.depth);
-    sumatorio += github_pagerank_aux(user_aux, resultado, acc + 1, sumatorio) / user_aux.following.length;
+    let user_aux = await _callGithubApi(primer_seguidor, resultado.params.depth);
+    const pagerank_aux = await github_pagerank_aux(user_aux, resultado, acc + 1, sumatorio);
+    sumatorio += pagerank_aux / user_aux.following.length;
     pagerank = (1 - resultado.params.damping_factor) + resultado.params.damping_factor * parseFloat(sumatorio);
     resultado.result[acc].score = parseFloat(pagerank);
   } else {
-    //sumatorio += 1 / user_aux.following.length;
-    pagerank = (1 - resul.resultado.params.damping_factor) + resul.resultado.params.damping_factor * 1;
+    pagerank = (1 - resultado.params.damping_factor) + resultado.params.damping_factor * 1;
   }
-  return pagerank;
+  if (acc === 0) {
+    return resultado;
+  } else {
+    return pagerank;
+  }
 }
 export { github_pagerank, _callGithubApi };

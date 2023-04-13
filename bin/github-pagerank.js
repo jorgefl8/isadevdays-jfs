@@ -15,16 +15,17 @@ program
   .parse(process.argv);
 
 const username = program.args[0];
+
 if (!username) {
   console.error('Error: No username provided');
   process.exit(1);
 }
 
-const depth = parseInt(program.depth);
-const damping = parseFloat(program.damping);
+const depth = parseInt(`${program.opts().depth}`);
+const damping = parseFloat(`${program.opts().damping}`);
 const output = program.output;
 
-const results = github_pagerank(username, depth, damping);
+const results = await github_pagerank(username, depth, damping);
 
 if (output) {
   const fs = require('fs');
