@@ -1,0 +1,441 @@
+{
+	"info": {
+		"_postman_id": "6e427457-c4e6-4d91-b8e3-feb465fba552",
+		"name": "ISADEVDAY",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26013124"
+	},
+	"item": [
+		{
+			"name": "/pagerank/rafnixg",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/api/v1/pagerank/rafnixg?depth=3&damping=0.85",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"pagerank",
+						"rafnixg"
+					],
+					"query": [
+						{
+							"key": "depth",
+							"value": "3"
+						},
+						{
+							"key": "damping",
+							"value": "0.85"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/pagerank/rafnixg",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12345/api/v1/pagerank/rafnixg?depth=3&damping=0.85",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12345",
+							"path": [
+								"api",
+								"v1",
+								"pagerank",
+								"rafnixg"
+							],
+							"query": [
+								{
+									"key": "depth",
+									"value": "3"
+								},
+								{
+									"key": "damping",
+									"value": "0.85"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "22"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"16-PyIAdMNFrN70K7nUcrE6EafCeGQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Apr 2023 10:10:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"rafnixg\"\n}"
+				}
+			]
+		},
+		{
+			"name": "/pagerank/rafnixg",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/api/v1/pagerank/rafnixg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"pagerank",
+						"rafnixg"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/pagerank/rafnixg",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12345/api/v1/pagerank/rafnixg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12345",
+							"path": [
+								"api",
+								"v1",
+								"pagerank",
+								"rafnixg"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "404"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"194-VKsI9NUKO24+Sofu4wv8wLR+V/E\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Apr 2023 10:14:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"params\": {\n        \"username\": \"rafnixg\",\n        \"damping_factor\": 0.85,\n        \"depth\": 3\n    },\n    \"_id\": \"64392690e90ffba5ab39169d\",\n    \"status\": \"Working from home\",\n    \"result\": [\n        {\n            \"username\": \"rafnixg\",\n            \"score\": 0.15532442684550993,\n            \"_id\": \"64392690e90ffba5ab39169e\"\n        },\n        {\n            \"username\": \"satyamverma21\",\n            \"score\": 0.1503367579908676,\n            \"_id\": \"64392690e90ffba5ab39169f\"\n        },\n        {\n            \"username\": \"abrehan2\",\n            \"score\": 0.16164383561643839,\n            \"_id\": \"64392690e90ffba5ab3916a0\"\n        }\n    ],\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "/pagerank",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/api/v1/pagerank",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"pagerank"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/pagerank",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12345/api/v1/pagerank",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12345",
+							"path": [
+								"api",
+								"v1",
+								"pagerank"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "406"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"196-Prb8mz+SU+7q6kNh/36RJPDKkaM\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Apr 2023 10:10:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"params\": {\n            \"username\": \"rafnixg\",\n            \"damping_factor\": 0.85,\n            \"depth\": 3\n        },\n        \"_id\": \"6439262ddc1772238ebfa349\",\n        \"status\": \"Working from home\",\n        \"result\": [\n            {\n                \"username\": \"rafnixg\",\n                \"score\": 0.15532442684550993,\n                \"_id\": \"6439262ddc1772238ebfa34a\"\n            },\n            {\n                \"username\": \"satyamverma21\",\n                \"score\": 0.1503367579908676,\n                \"_id\": \"6439262ddc1772238ebfa34b\"\n            },\n            {\n                \"username\": \"abrehan2\",\n                \"score\": 0.16164383561643839,\n                \"_id\": \"6439262ddc1772238ebfa34c\"\n            }\n        ],\n        \"__v\": 0\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "/pagerank",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/api/v1/pagerank",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"pagerank"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/pagerank",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12345/api/v1/pagerank",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12345",
+							"path": [
+								"api",
+								"v1",
+								"pagerank"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"20-/Ux3jo1Sfbvi2/rhuK2Oaf/K4JA\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Apr 2023 10:14:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "Recursos borrados correctamente."
+				}
+			]
+		},
+		{
+			"name": "/pagerank/rafnixg",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/api/v1/pagerank/rafnixg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"pagerank",
+						"rafnixg"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/pagerank/rafnixg",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12345/api/v1/pagerank/rafnixg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12345",
+							"path": [
+								"api",
+								"v1",
+								"pagerank",
+								"rafnixg"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "39"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"27-Xz80Elw1TFUQ8Hpdtq/K8/DjD8E\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Apr 2023 10:14:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "El recurso se ha borrado correctamente."
+				}
+			]
+		}
+	]
+}
