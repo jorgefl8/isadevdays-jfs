@@ -1,6 +1,6 @@
 
 <section>
-    <h2>Front-ends</h2>
+    <h2>Front-end</h2>
     <ul>
         <li>
             <a href="/pagerank">/pagerank</a>
@@ -16,8 +16,8 @@
     <h2>Documentación POSTMAN</h2>
     <ul>
         <li>
-            <a href="https://sos2223-21.ew.r.appspot.com/api/v2/market-prices-stats/docs">
-                /market-prices-stats/docs</a>(hecho por <a href="https://github.com/jorgefl8">Jorge Florentino Serra</a>)
+            <a href="http://localhost:12345/api/v1/pagerank/docs">
+                /pagerank</a>(hecho por <a href="https://github.com/jorgefl8">Jorge Florentino Serra</a>)
         </li>
     </ul>
 </section>

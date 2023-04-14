@@ -1,0 +1,22 @@
+# .github/workflows/deploy.yml
+name: Funcionamiento correcto de todas las funcionalidades
+on:
+  push:
+    branches:
+      - main
+jobs:
+  name: Comprobamos las funcionalidades
+  runs-on: ubuntu-latest
+  environment: production
+  steps:
+    - uses: actions/checkout@v2
+    - name: "Instalar modulos"
+      run: npm install
+    - name: "Actualizando frontend producción"
+      run: cd frontend; npm install;npm run build;cd ..
+    - name: "Inicia servidor node"
+      run: npm start &
+    - id: "auth"
+      uses: "google-github-actions/auth@v1"
+      with:
+        credentials_json: "${{ secrets.GCP_SA_KEY_JSON }}"

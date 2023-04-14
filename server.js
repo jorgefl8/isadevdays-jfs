@@ -1,5 +1,5 @@
 import cors from "cors";
-import { handler } from "./frontend/build/handler.js";
+//import { handler } from "./frontend/build/handler.js";
 import express from "express";
 import { loadBackend } from './backend/backend.js';
 import { connectDB } from './db.js';
@@ -10,7 +10,7 @@ const deploy = async () => {
   app.use(cors());
   app.use(express.json());
   //frontend
-  app.use(handler);
+  //app.use(handler);
 
   const mongoUrl = process.env.MONGO_URL ?? "mongodb://localhost:27017/github-pagerank";
 
