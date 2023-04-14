@@ -1,5 +1,5 @@
 const ruta = "/api/v1/pagerank";
-import { User } from "./db.js";
+import  User from "../models/User.js";
 import { github_pagerank } from "./github_pagerank.js";
 
 function loadBackend(app) {
