@@ -1,7 +1,7 @@
 import axios from "axios";
 async function _callGithubApi(username, depth) {
-  //const token = "Bearer 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";
-  const token = `Bearer ${process.env.GITHUB_TOKEN}`;
+  const token = "Bearer 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";
+  //const token = `Bearer ${process.env.GITHUB_TOKEN}`;
   const url = "https://api.github.com/graphql";
   const requestConfig = { Authorization: token, Accept: 'application/vnd.github.starfox-preview+json' };
   let usuario = {
