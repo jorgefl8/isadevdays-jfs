@@ -16,7 +16,7 @@ jobs:
       - name: "Actualizando frontend producción"
         run: cd frontend; npm install;npm run build;cd ..
       - name: "Creating container on docker"
-        run: docker run -p 27017:27017 mongo
+        run: docker run -d -p 27017:27017 mongo
       - name: "Inicia servidor node"
         run: npm start &
       - name: "Test de las funcionalidades"
