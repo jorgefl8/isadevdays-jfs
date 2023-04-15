@@ -7,17 +7,17 @@
         </li>
     </ul>
     
-    <h2>Repositorio</h2>
+    <h2>Repository</h2>
     <ul>
         <li>
             <a href="https://github.com/jorgefl8/isadevdays-jfs">jorgefl8/isadevdays-jfs</a>
         </li>
     </ul>
-    <h2>Documentación POSTMAN</h2>
+    <h2>Documentation POSTMAN</h2>
     <ul>
         <li>
             <a href="http://localhost:12345/api/v1/pagerank/docs">
-                /pagerank</a>(hecho por <a href="https://github.com/jorgefl8">Jorge Florentino Serra</a>)
+                /pagerank</a>(made by <a href="https://github.com/jorgefl8">Jorge Florentino Serra</a>)
         </li>
     </ul>
 </section>

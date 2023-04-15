@@ -1,8 +1,8 @@
 <p>
-    Proyecto para realizar los retos de los IsaDevDays 22-23
+    Proyecto where im going to do IsaDevDays 22-23 challenges.
 </p>
 <p>
-    Hecho por <a href="https://github.com/jorgefl8">Jorge Florentino Serra.</a>
+    Done by <a href="https://github.com/jorgefl8">Jorge Florentino Serra.</a>
 </p>
 
 <style>

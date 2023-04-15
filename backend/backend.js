@@ -3,7 +3,6 @@ import { github_pagerank } from "./github_pagerank.js";
 
 const ruta = "/api/v1/pagerank";
 
-
 function loadBackend(app) {
   app.get(ruta + '/docs', function (req, res) {
     res.status(301).redirect('https://documenter.getpostman.com/view/26013124/2s93XwzjWp');
@@ -43,7 +42,7 @@ app.post(ruta + '/:username', async (req, res) => {
   console.log(`New POST to /pagerank/${username}?depth=${depth}&damping=${damping_factor}`);
   const user_alg = await github_pagerank(username, depth, damping_factor);
   if (user_alg == null) {
-    res.status(500).send({ message: err.message || "Error al obtener los datos de Github" });
+    res.status(500).send({ message: err.message || "Error getting data from Github" });
   } else {
     try {
       User.create(user_alg);
@@ -58,11 +57,11 @@ app.delete(ruta, async (req, res) => {
   console.log(`New DELETE to /pagerank`);
   try {
     User.collection.deleteMany({});
-    console.log(`Recursos borrados correctamente.`);
-    res.status(200).send("Recursos borrados correctamente.");
+    console.log(`Resources deleted correctly. All users deleted from database.`);
+    res.status(200).send("Resources deleted correctly. All users deleted from database.");
 
   } catch (err) {
-    console.log(`Ha habido un error borrando los usuarios: ${err}`);
+    console.log(`Error deleting resources: ${err}.`);
     res.sendStatus(500);
   }
 });
@@ -71,11 +70,11 @@ app.delete(ruta + "/:username", async (req, res) => {
   console.log(`New DELETE to /pagerank/${username}`);
   try {
     User.collection.deleteOne({ "params.username": username });
-    console.log(`Recurso /${username} borrado correctamnte.`);
-    res.status(200).send("El recurso se ha borrado correctamente.");
+    console.log(`Resource /${username} deleted.`);
+    res.status(200).send("Resource deleted.");
 
   } catch (err) {
-    console.log(`Ha habido un error borrando el recurso del usuario ${username}: ${err}`);
+    console.log(`Error deleting resource ${username}: ${err}`);
     res.sendStatus(500);
   }
 });

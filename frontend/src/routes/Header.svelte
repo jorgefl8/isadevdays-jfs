@@ -5,8 +5,8 @@
 <div>
     <Nav>
         <h2>Github-PageRank</h2>
-        <NavLink href="/"><h6>Inicio</h6> <Icon name="house-fill"/></NavLink>
-        <NavLink href="/about"><h6>Acerca de</h6></NavLink>
+        <NavLink href="/"><h6>Home</h6> <Icon name="house-fill"/></NavLink>
+        <NavLink href="/about"><h6>About</h6></NavLink>
     </Nav>
 </div>
 

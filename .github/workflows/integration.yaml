@@ -1,28 +1,28 @@
-# .github/workflows/deploy.yml
-name: Funcionamiento correcto de todas las funcionalidades
+# .github/workflows/integration.yml
+name: Checking all functionalities
 on:
   push:
     branches:
       - main
 jobs:
-  pruebas:
-    name: Comprobamos las funcionalidades
+  check:
+    name: Checking all functionalities
     runs-on: ubuntu-latest
     environment: production
     steps:
       - uses: actions/checkout@v2
-      - name: "Instalar modulos"
+      - name: "npm install"
         run: npm install
-      - name: "Actualizando frontend producción"
+      - name: "Updating production front-end"
         run: cd frontend; npm install;npm run build;cd ..
       - name: "Creating container on docker"
         run: docker run -d -p 27017:27017 mongo
       - name: Set environment variables
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_PRUEBAS }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GHPR }}
         run: echo "GITHUB_TOKEN=$GITHUB_TOKEN" >> $GITHUB_ENV
-      - name: "Inicia servidor node"
+      - name: "Run node server"
         run: npm start &
-      - name: "Test de las funcionalidades"
+      - name: "Test"
         run: npm test
       
