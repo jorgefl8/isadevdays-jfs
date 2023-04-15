@@ -17,12 +17,12 @@ jobs:
         run: cd frontend; npm install;npm run build;cd ..
       - name: "Creating container on docker"
         run: docker run -d -p 27017:27017 mongo
-      - name: "Inicia servidor node"
-        run: npm start &
       - name: Set environment variables
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_PRUEBAS }}
         run: echo "GITHUB_TOKEN=$GITHUB_TOKEN" >> $GITHUB_ENV
+      - name: "Inicia servidor node"
+        run: npm start &
       - name: "Test de las funcionalidades"
         run: npm test
       
