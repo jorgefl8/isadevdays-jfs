@@ -1,5 +1,4 @@
 # Project for IsaDevDays 2023
----------------------------
 - This project is based on PageRank algorithm based on social network, GITHUB in this case, using the API GraphQL to get the information of the users and their repositories. 
 - The backend is developed in NodeJS and the frontend in Svelte.
 - The database used is MongoDB.
