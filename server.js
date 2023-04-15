@@ -6,7 +6,7 @@ import { connectDB } from './db.js';
 
 const deploy = async () => {
   var app = express();
-  var port = process.env.PORT || 12345;
+  var port = process.env.PORT ?? 12345;
   app.use(cors());
   app.use(express.json());
   //frontend
