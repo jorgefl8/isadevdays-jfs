@@ -59,11 +59,20 @@ async function _callGithubApi(username, depth) {
     } else {
       const result = await axios.post(url, JSON.stringify({ query: query, variables: { depth: depth } }), { headers: requestConfig });
       const userData = result.data.data.user;
-      usuario.status = userData.status?.message;
-      usuario.followers = userData.followers.nodes.map((follower) => follower.login);
-      usuario.following = userData.following.nodes.map((following) => following.login);
-      endCursor = userData.following.pageInfo.endCursor;
-      hasNextPage = userData.following.pageInfo.hasNextPage;
+      if ((userData.status != undefined) && (userData.status != null)) {
+        usuario.status = userData.status.message;
+      } else {
+        usuario.status = "NO STATUS";
+      }
+      if (userData.followers.nodes.length > 0 && userData.following.nodes.length > 0) {
+        usuario.followers = userData.followers.nodes.map((follower) => follower.login);
+        usuario.following = userData.following.nodes.map((following) => following.login);
+        endCursor = userData.following.pageInfo.endCursor;
+        hasNextPage = userData.following.pageInfo.hasNextPage;
+      } else {
+        usuario.error = "NO FOLLOWERS OR FOLLOWING";
+        hasNextPage = false;
+      }
     }
   }
   return usuario;
@@ -71,21 +80,26 @@ async function _callGithubApi(username, depth) {
 
 async function github_pagerank(username, depth, damping_factor) {
   const user = await _callGithubApi(username, depth);
-  var resultado = {
-    "status": "",
-    "params": {
-      "username": "",
-      "damping_factor": 0,
-      "depth": 0
-    },
-    "result": []
-  };
-  resultado.status = user.status;
-  resultado.params.username = user.username;
-  resultado.params.damping_factor = parseFloat(damping_factor);
-  resultado.params.depth = parseInt(depth);
-  const resul = github_pagerank_aux(user, resultado, 0, 0);
-  return resul;
+  if (user.error) {
+    const res_eror = { "error": user.error };
+    return res_eror;
+  } else {
+    var resultado = {
+      "status": "",
+      "params": {
+        "username": "",
+        "damping_factor": 0,
+        "depth": 0
+      },
+      "result": []
+    };
+    resultado.status = user.status;
+    resultado.params.username = user.username;
+    resultado.params.damping_factor = parseFloat(damping_factor);
+    resultado.params.depth = parseInt(depth);
+    const resul = github_pagerank_aux(user, resultado, 0, 0);
+    return resul;
+  }
 }
 async function github_pagerank_aux(user, resultado, acc, sumatorio) {
   let pagerank = 0;

@@ -6,7 +6,7 @@ COPY . .
 
 RUN npm install --only=prod
 
-ARG NODE_ENV_VAR=production
-ENV NODE_ENV $NODE_ENV_VAR
+ARG NODE_ENV=production
+ENV NODE_ENV $NODE_ENV
 
 CMD ["node", "index.js"]

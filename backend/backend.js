@@ -35,48 +35,57 @@ function loadBackend(app) {
     }
   });
 
-app.post(ruta + '/:username', async (req, res) => {
-  const username = req.params.username;
-  const depth = parseInt(req.query.depth);
-  const damping_factor = parseFloat(req.query.damping);
-  console.log(`New POST to /pagerank/${username}?depth=${depth}&damping=${damping_factor}`);
-  const user_alg = await github_pagerank(username, depth, damping_factor);
-  if (user_alg == null) {
-    res.status(500).send({ message: err.message || "Error getting data from Github" });
-  } else {
+  app.post(ruta + '/:username', async (req, res) => {
+    const username = req.params.username;
+    const depth = parseInt(req.query.depth);
+    const damping_factor = parseFloat(req.query.damping);
+    console.log(`New POST to /pagerank/${username}?depth=${depth}&damping=${damping_factor}`);
+    const user = await User.findOne({ 'params.username': username });
+    if (!user) {
+      const user_alg = await github_pagerank(username, depth, damping_factor);
+      if (user_alg.error) {
+        res.status(400).json({ message: user_alg.error });
+      } else {
+        if (user_alg == null) {
+          res.status(500).send({ message: err.message || "Error getting data from Github" });
+        } else {
+          try {
+            User.create(user_alg);
+            const resul = { "username": user_alg.params.username };
+            res.status(201).json(resul);
+          } catch (err) {
+            res.status(400).json({ message: err.message });
+          }
+        }
+      }
+    }else {
+        res.status(409).json({ message: 'User already exists' });
+    } 
+  });
+  app.delete(ruta, async (req, res) => {
+    console.log(`New DELETE to /pagerank`);
     try {
-      User.create(user_alg);
-      const resul = { "username": user_alg.params.username};
-      res.status(201).json(resul);
+      User.collection.deleteMany({});
+      console.log(`Resources deleted correctly. All users deleted from database.`);
+      res.status(200).send("Resources deleted correctly. All users deleted from database.");
+
     } catch (err) {
-      res.status(400).json({ message: err.message });
+      console.log(`Error deleting resources: ${err}.`);
+      res.sendStatus(500);
     }
-  }
-});
-app.delete(ruta, async (req, res) => {
-  console.log(`New DELETE to /pagerank`);
-  try {
-    User.collection.deleteMany({});
-    console.log(`Resources deleted correctly. All users deleted from database.`);
-    res.status(200).send("Resources deleted correctly. All users deleted from database.");
+  });
+  app.delete(ruta + "/:username", async (req, res) => {
+    const username = req.params.username;
+    console.log(`New DELETE to /pagerank/${username}`);
+    try {
+      User.collection.deleteOne({ "params.username": username });
+      console.log(`Resource /${username} deleted.`);
+      res.status(200).send("Resource deleted.");
 
-  } catch (err) {
-    console.log(`Error deleting resources: ${err}.`);
-    res.sendStatus(500);
-  }
-});
-app.delete(ruta + "/:username", async (req, res) => {
-  const username = req.params.username;
-  console.log(`New DELETE to /pagerank/${username}`);
-  try {
-    User.collection.deleteOne({ "params.username": username });
-    console.log(`Resource /${username} deleted.`);
-    res.status(200).send("Resource deleted.");
-
-  } catch (err) {
-    console.log(`Error deleting resource ${username}: ${err}`);
-    res.sendStatus(500);
-  }
-});
+    } catch (err) {
+      console.log(`Error deleting resource ${username}: ${err}`);
+      res.sendStatus(500);
+    }
+  });
 }
 export { loadBackend }; 
