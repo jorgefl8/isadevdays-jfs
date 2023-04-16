@@ -12,7 +12,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:12345/api/v1/pagerank/manerajona?depth=3&damping=0.85",
+					"raw": "http://localhost:12345/api/v1/pagerank/rafnixg?depth=3&damping=0.85",
 					"protocol": "http",
 					"host": [
 						"localhost"
