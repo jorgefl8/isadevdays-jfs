@@ -1,6 +1,6 @@
 import server from './server.js';
 
-const env = process.env.NODE_ENV ?? 'production';
+const env = process.env.NODE_ENV ? process.env.NODE_ENV : 'production';
 
 server.deploy(env).catch((err) => console.error(err));
 
