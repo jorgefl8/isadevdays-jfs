@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 const program = new Command();
-import {github_pagerank } from '../backend/github_pagerank.js';
+import { github_pagerank } from '../backend/github_pagerank.js';
 
 program
   .usage('github-pagerank [options] <username>')
@@ -15,7 +15,6 @@ program
   .parse(process.argv);
 
 const username = program.args[0];
-
 if (!username) {
   console.error('Error: No username provided');
   process.exit(1);
@@ -23,6 +22,7 @@ if (!username) {
 
 const depth = parseInt(`${program.opts().depth}`);
 const damping = parseFloat(`${program.opts().damping}`);
+console.log(`Calculating PageRank for ${username} with depth ${depth} and damping factor ${damping}.`);
 const output = program.output;
 
 const results = await github_pagerank(username, depth, damping);

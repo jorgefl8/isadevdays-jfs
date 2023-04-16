@@ -1,6 +1,7 @@
 import axios from "axios";
 async function _callGithubApi(username, depth) {
-  const token = `Bearer ${process.env.GITHUB_TOKEN}`;
+  //const token = `Bearer ${process.env.GITHUB_TOKEN}`;
+  const token = `Bearer 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`;
   const url = "https://api.github.com/graphql";
   const requestConfig = { Authorization: token, Accept: 'application/vnd.github.starfox-preview+json' };
   let usuario = {
@@ -59,18 +60,23 @@ async function _callGithubApi(username, depth) {
     } else {
       const result = await axios.post(url, JSON.stringify({ query: query, variables: { depth: depth } }), { headers: requestConfig });
       const userData = result.data.data.user;
-      if ((userData.status != undefined) && (userData.status != null)) {
-        usuario.status = userData.status.message;
-      } else {
-        usuario.status = "NO STATUS";
-      }
-      if (userData.followers.nodes.length > 0 && userData.following.nodes.length > 0) {
-        usuario.followers = userData.followers.nodes.map((follower) => follower.login);
-        usuario.following = userData.following.nodes.map((following) => following.login);
-        endCursor = userData.following.pageInfo.endCursor;
-        hasNextPage = userData.following.pageInfo.hasNextPage;
-      } else {
-        usuario.error = "NO FOLLOWERS OR FOLLOWING";
+      if (userData != null) {
+        if ((userData.status != undefined) && (userData.status != null)) {
+          usuario.status = userData.status.message;
+        } else {
+          usuario.status = "NO STATUS";
+        }
+        if (userData.followers.nodes.length > 0 && userData.following.nodes.length > 0) {
+          usuario.followers = userData.followers.nodes.map((follower) => follower.login);
+          usuario.following = userData.following.nodes.map((following) => following.login);
+          endCursor = userData.following.pageInfo.endCursor;
+          hasNextPage = userData.following.pageInfo.hasNextPage;
+        } else {
+          usuario.error = "NO FOLLOWERS OR FOLLOWING";
+          hasNextPage = false;
+        }
+      }else{
+        usuario.error = "THE USER DOES NOT EXIST";
         hasNextPage = false;
       }
     }
