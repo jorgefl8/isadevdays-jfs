@@ -12,7 +12,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:12345/api/v1/pagerank/rafnixg?depth=3&damping=0.85",
+					"raw": "http://localhost:"+ `${process.env.PORT}` +"/api/v1/pagerank/manerajona?depth=3&damping=0.85",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -22,7 +22,7 @@
 						"api",
 						"v1",
 						"pagerank",
-						"rafnixg"
+						"manerajona"
 					],
 					"query": [
 						{
@@ -110,6 +110,212 @@
 			]
 		},
 		{
+			"name": "/pagerank/manerajona",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/api/v1/pagerank/manerajona?depth=3&damping=0.85",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"pagerank",
+						"manerajona"
+					],
+					"query": [
+						{
+							"key": "depth",
+							"value": "3"
+						},
+						{
+							"key": "damping",
+							"value": "0.85"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/pagerank/manerajona",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12345/api/v1/pagerank/manerajona?depth=3&damping=0.85",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12345",
+							"path": [
+								"api",
+								"v1",
+								"pagerank",
+								"manerajona"
+							],
+							"query": [
+								{
+									"key": "depth",
+									"value": "3"
+								},
+								{
+									"key": "damping",
+									"value": "0.85"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"19-asRVvnxm/ZISAbGcY6Jvmh1rAQU\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Apr 2023 10:29:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"manerajona\"\n}"
+				}
+			]
+		},
+		{
+			"name": "/pagerank/codinghemp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/api/v1/pagerank/codinghemp?depth=3&damping=0.85",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"pagerank",
+						"codinghemp"
+					],
+					"query": [
+						{
+							"key": "depth",
+							"value": "3"
+						},
+						{
+							"key": "damping",
+							"value": "0.85"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/pagerank/codinghemp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12345/api/v1/pagerank/codinghemp?depth=3&damping=0.85",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12345",
+							"path": [
+								"api",
+								"v1",
+								"pagerank",
+								"codinghemp"
+							],
+							"query": [
+								{
+									"key": "depth",
+									"value": "3"
+								},
+								{
+									"key": "damping",
+									"value": "0.85"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"19-tSfRNhJJxJ458rBP3cDgUwvYNT4\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Apr 2023 10:30:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"codinghemp\"\n}"
+				}
+			]
+		},
+		{
 			"name": "/pagerank/rafnixg",
 			"request": {
 				"method": "GET",
@@ -189,6 +395,172 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"params\": {\n        \"username\": \"rafnixg\",\n        \"damping_factor\": 0.85,\n        \"depth\": 3\n    },\n    \"_id\": \"64392690e90ffba5ab39169d\",\n    \"status\": \"Working from home\",\n    \"result\": [\n        {\n            \"username\": \"rafnixg\",\n            \"score\": 0.15532442684550993,\n            \"_id\": \"64392690e90ffba5ab39169e\"\n        },\n        {\n            \"username\": \"satyamverma21\",\n            \"score\": 0.1503367579908676,\n            \"_id\": \"64392690e90ffba5ab39169f\"\n        },\n        {\n            \"username\": \"abrehan2\",\n            \"score\": 0.16164383561643839,\n            \"_id\": \"64392690e90ffba5ab3916a0\"\n        }\n    ],\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "/pagerank/codinghemp",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/api/v1/pagerank/codinghemp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"pagerank",
+						"codinghemp"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/pagerank/codinghemp",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12345/api/v1/pagerank/codinghemp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12345",
+							"path": [
+								"api",
+								"v1",
+								"pagerank",
+								"codinghemp"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "409"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"199-EkxTg0Eh/uGfoo7lLms3AUErEaU\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Apr 2023 10:30:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"params\": {\n        \"username\": \"codinghemp\",\n        \"damping_factor\": 0.85,\n        \"depth\": 3\n    },\n    \"_id\": \"643bce4b3d2af95150cb0f72\",\n    \"status\": \"On vacation\",\n    \"result\": [\n        {\n            \"username\": \"codinghemp\",\n            \"score\": 0.15036988433832338,\n            \"_id\": \"643bce4b3d2af95150cb0f73\"\n        },\n        {\n            \"username\": \"Kitemaggwa-Shafic\",\n            \"score\": 0.15012952555477707,\n            \"_id\": \"643bce4b3d2af95150cb0f74\"\n        },\n        {\n            \"username\": \"abrehan2\",\n            \"score\": 0.15207823960880198,\n            \"_id\": \"643bce4b3d2af95150cb0f75\"\n        }\n    ],\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "/pagerank/manerajona",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/api/v1/pagerank/manerajona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"pagerank",
+						"manerajona"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/pagerank/manerajona",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12345/api/v1/pagerank/manerajona",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12345",
+							"path": [
+								"api",
+								"v1",
+								"pagerank",
+								"manerajona"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "404"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"194-0YQjmNpiZfesNJF+ItdZ1XZg8L4\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Apr 2023 10:30:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"params\": {\n        \"username\": \"manerajona\",\n        \"damping_factor\": 0.85,\n        \"depth\": 3\n    },\n    \"_id\": \"643bce243d2af95150cb0f6c\",\n    \"status\": \"NO STATUS\",\n    \"result\": [\n        {\n            \"username\": \"manerajona\",\n            \"score\": 0.15029543058865158,\n            \"_id\": \"643bce243d2af95150cb0f6d\"\n        },\n        {\n            \"username\": \"maxerpro\",\n            \"score\": 0.15014825211467928,\n            \"_id\": \"643bce243d2af95150cb0f6e\"\n        },\n        {\n            \"username\": \"hanzelkaraagac\",\n            \"score\": 0.15278688524590167,\n            \"_id\": \"643bce243d2af95150cb0f6f\"\n        }\n    ],\n    \"__v\": 0\n}"
 				}
 			]
 		},
@@ -274,87 +646,6 @@
 			]
 		},
 		{
-			"name": "/pagerank",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:12345/api/v1/pagerank",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "12345",
-					"path": [
-						"api",
-						"v1",
-						"pagerank"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "/pagerank",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:12345/api/v1/pagerank",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "12345",
-							"path": [
-								"api",
-								"v1",
-								"pagerank"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "32"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"20-/Ux3jo1Sfbvi2/rhuK2Oaf/K4JA\""
-						},
-						{
-							"key": "Date",
-							"value": "Fri, 14 Apr 2023 10:14:42 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "Recursos borrados correctamente."
-				}
-			]
-		},
-		{
 			"name": "/pagerank/rafnixg",
 			"request": {
 				"method": "DELETE",
@@ -434,6 +725,87 @@
 					],
 					"cookie": [],
 					"body": "El recurso se ha borrado correctamente."
+				}
+			]
+		},
+		{
+			"name": "/pagerank",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:12345/api/v1/pagerank",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"pagerank"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/pagerank",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12345/api/v1/pagerank",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12345",
+							"path": [
+								"api",
+								"v1",
+								"pagerank"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"20-/Ux3jo1Sfbvi2/rhuK2Oaf/K4JA\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Apr 2023 10:14:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "Recursos borrados correctamente."
 				}
 			]
 		}
