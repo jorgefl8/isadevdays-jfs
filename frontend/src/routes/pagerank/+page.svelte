@@ -45,6 +45,10 @@
         message = "Error in request";
         color_alert = "danger";
       }
+      setTimeout(() => {
+        message = "";
+        color_alert = "";
+      }, 3200);
     }
   
     async function createUser() {
@@ -79,6 +83,10 @@
           message = "Resource already exists";
           color_alert = "warning";
       }
+      setTimeout(() => {
+        message = "";
+        color_alert = "";
+      }, 3200);
     }
     async function delete_all() {
       resultStatus = result = "";
@@ -93,6 +101,10 @@
         open = false;
         getUsers();
       }
+      setTimeout(() => {
+        message = "";
+        color_alert = "";
+      }, 3200);
     }
     async function delete_one(user) {
       resultStatus = result = "";
@@ -106,83 +118,86 @@
         color_alert = "success";
         getUsers();
       }
+      setTimeout(() => {
+        message = "";
+        color_alert = "";
+      }, 3200);
     }
   </script>
-  
-  <div class="cabecera">
-    <Row>
-      <Col xs="7">
-        <h2>
-          GitHub PageRank Users
-          <Button color="danger" on:click={toggle}>Delete resources</Button>
-          <Modal isOpen={open} {toggle}>
-            <ModalHeader {toggle}>You are going to delete all db resources</ModalHeader>
-            <ModalBody>¿Are you sure?</ModalBody>
-            <ModalFooter>
-              <Button color="primary" on:click={delete_all}>Proceed</Button>
-              <Button color="secondary" on:click={toggle}>Cancel</Button>
-            </ModalFooter>
-          </Modal>
-        </h2>
-      </Col>
-      <Col xs="4">
+<main>
+  <div class="container" style="margin-top: 1%;">
+    <div class="row, cabecera">
+      <div class="col-md-6">
+          <h2>
+            GitHub PageRank Users
+            <Button color="danger" on:click={toggle}>Delete resources</Button>
+            <Modal isOpen={open} {toggle}>
+              <ModalHeader {toggle}>You are going to delete all db resources</ModalHeader>
+              <ModalBody>¿Are you sure?</ModalBody>
+              <ModalFooter>
+                <Button color="primary" on:click={delete_all}>Proceed</Button>
+                <Button color="secondary" on:click={toggle}>Cancel</Button>
+              </ModalFooter>
+            </Modal>
+          </h2>
+      </div>
+      <div class="col-md-6">
         {#if message != ""}
-          <Alert fade={true} color={color_alert} dismissible>{message}</Alert>
-        {/if}
-      </Col>
-    </Row>
-  </div>
-  <Table bordered striped>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Depth</th>
-        <th>Damping_factor</th>
-        <th>Status</th>
-        <th>Result</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><input bind:value={newUser.username} /></td>
-        <td><input bind:value={newUser.depth} /></td>
-        <td><input bind:value={newUser.damping_factor} /></td>
-        <td />
-        <td />
-        <td><Button color="primary" on:click={createUser}>Create</Button></td>
-      </tr>
-      {#each users as x}
+            <Alert fade={true} color={color_alert} >{message}</Alert>
+          {/if}
+      </div>
+    </div>
+    <Table bordered striped>
+      <thead>
         <tr>
-          <td>{x.params.username}</td>
-          <td>{x.params.depth}</td>
-          <td>{x.params.damping_factor}</td>
-          <td>{x.status}</td>
-          <td>
-            <Table striped>
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                {#each x.result as y}
-                  <tr>
-                    <td>{y.username}</td>
-                    <td>{y.score}</td>
-                  </tr>
-                {/each}
-              </tbody>
-            </Table>
-          </td>
-          <td><Button color="danger" on:click={delete_one(x.params.username)}>Delete</Button></td>
-          <td>&nbsp</td>
+          <th>Username</th>
+          <th>Depth</th>
+          <th>Damping_factor</th>
+          <th>Status</th>
+          <th>Result</th>
         </tr>
-      {/each}
-    </tbody>
-  </Table>
-  
-  <style>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input bind:value={newUser.username} /></td>
+          <td><input bind:value={newUser.depth} /></td>
+          <td><input bind:value={newUser.damping_factor} /></td>
+          <td />
+          <td />
+          <td><Button color="primary" on:click={createUser}>Create</Button></td>
+        </tr>
+        {#each users as x}
+          <tr>
+            <td>{x.params.username}</td>
+            <td>{x.params.depth}</td>
+            <td>{x.params.damping_factor}</td>
+            <td>{x.status}</td>
+            <td>
+              <Table striped>
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {#each x.result as y}
+                    <tr>
+                      <td>{y.username}</td>
+                      <td>{y.score}</td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </Table>
+            </td>
+            <td><Button color="danger" on:click={delete_one(x.params.username)}>Delete</Button></td>
+          </tr>
+        {/each}
+      </tbody>
+    </Table>
+  </div>
+</main>
+<style>
     h2 {
       margin-left: 2%;
       margin-top: 0.5%;
@@ -191,5 +206,11 @@
       margin-top: 1%;
       margin-left: 1.5%;
       margin-bottom: 1%;
+      display: flex;
     }
-  </style>
+    th {
+        background-color: #1e90ff;
+        color: white;
+        font-weight: bold;
+    }
+</style>

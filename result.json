@@ -1,0 +1,22 @@
+{
+  "status": "Working from home",
+  "params": {
+    "username": "rafnixg",
+    "damping_factor": 0.85,
+    "depth": 3
+  },
+  "result": [
+    {
+      "username": "rafnixg",
+      "score": 0.15517506493506497
+    },
+    {
+      "username": "satyamverma21",
+      "score": 0.15220779220779224
+    },
+    {
+      "username": "Hezron26",
+      "score": 0.2
+    }
+  ]
+}
