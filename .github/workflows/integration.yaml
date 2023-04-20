@@ -13,8 +13,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: "npm install"
         run: npm install
-      - name: "Updating production front-end"
-        run: cd frontend; npm install;npm run build;cd ..
+      #- name: "Updating production front-end"
+      #  run: cd frontend; npm install;npm run build;cd ..
       - name: "Creating container on docker"
         run: docker run -d -p 27017:27017 mongo
       - name: Set environment variables
